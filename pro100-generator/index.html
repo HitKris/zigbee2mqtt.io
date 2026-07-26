@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro100 Generator — szkic → mebel</title>
+  <style>
+    :root {
+      --bg: #f4f5f7; --panel: #fff; --ink: #1c2330; --muted: #6b7280;
+      --line: #e3e6eb; --accent: #2f6df6; --accent-d: #1d4fd0; --ok: #157a4b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--ink); background: var(--bg); }
+    header { background: #101827; color: #fff; padding: 18px 22px; }
+    header h1 { margin: 0; font-size: 19px; }
+    header p { margin: 4px 0 0; color: #9aa4b2; font-size: 13px; }
+    .wrap { display: grid; grid-template-columns: 340px 1fr; gap: 18px; padding: 18px;
+      max-width: 1200px; margin: 0 auto; }
+    @media (max-width: 860px) { .wrap { grid-template-columns: 1fr; } }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+      padding: 16px; }
+    .card h2 { margin: 0 0 12px; font-size: 14px; text-transform: uppercase;
+      letter-spacing: .04em; color: var(--muted); }
+    label { display: block; font-size: 13px; margin: 10px 0 4px; color: #374151; }
+    input, select { width: 100%; padding: 8px 10px; border: 1px solid var(--line);
+      border-radius: 7px; font-size: 14px; background: #fff; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    button { cursor: pointer; border: none; border-radius: 8px; font-size: 14px;
+      font-weight: 600; padding: 10px 14px; }
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; margin-top: 14px; }
+    .btn-primary:hover { background: var(--accent-d); }
+    .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .btn-ghost { background: #eef2ff; color: var(--accent-d); flex: 1; }
+    .btn-ghost:hover { background: #e0e7ff; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .sum { display: flex; gap: 18px; flex-wrap: wrap; margin: 4px 0 14px; }
+    .sum div { font-size: 13px; }
+    .sum b { display: block; font-size: 18px; color: var(--ink); }
+    .uwaga { font-size: 12px; color: var(--muted); }
+    svg { width: 100%; height: auto; background: #fbfcfe; border: 1px solid var(--line);
+      border-radius: 8px; }
+    .drawings { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+    @media (max-width: 620px) { .drawings { grid-template-columns: 1fr; } }
+    .hint { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412;
+      font-size: 12.5px; padding: 10px 12px; border-radius: 8px; margin-top: 12px; }
+    .tag { display: inline-block; background: #eef2ff; color: var(--accent-d);
+      border-radius: 5px; padding: 1px 7px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pro100 Generator — asystent projektu mebla</h1>
+    <p>Ze szkicu do listy formatek, rysunku i bryły 3D do importu w Pro100 · marka Hitner</p>
+  </header>
+
+  <div class="wrap">
+    <!-- Panel wejściowy -->
+    <div class="card">
+      <h2>Parametry mebla</h2>
+      <label>Typ / nazwa</label>
+      <input id="typ" value="Szafka korpusowa" />
+
+      <div class="row3">
+        <div><label>Szerokość (mm)</label><input id="szer" type="number" value="600" /></div>
+        <div><label>Wysokość (mm)</label><input id="wys" type="number" value="720" /></div>
+        <div><label>Głębokość (mm)</label><input id="gl" type="number" value="560" /></div>
+      </div>
+
+      <div class="row">
+        <div><label>Grubość płyty (mm)</label><input id="grubosc" type="number" value="18" /></div>
+        <div><label>Grubość pleców (mm)</label><input id="gruboscHDF" type="number" value="3" /></div>
+      </div>
+
+      <div class="row3">
+        <div><label>Półki</label><input id="liczbaPolek" type="number" value="1" min="0" /></div>
+        <div><label>Drzwi</label>
+          <select id="liczbaDrzwi"><option>0</option><option>1</option><option selected>2</option></select>
+        </div>
+        <div><label>Szuflady</label><input id="liczbaSzuflad" type="number" value="0" min="0" /></div>
+      </div>
+
+      <label>Plecy</label>
+      <select id="plecy">
+        <option value="nakladane" selected>Nakładane na tył</option>
+        <option value="wpuszczane">Wpuszczane w rowek</option>
+        <option value="brak">Brak</option>
+      </select>
+
+      <label>Materiał korpusu (opis)</label>
+      <input id="material" value="płyta 18 mm" />
+
+      <button class="btn-primary" id="gen">Generuj projekt</button>
+
+      <div class="btns">
+        <button class="btn-ghost" id="csv">Pobierz CSV (rozkrój)</button>
+        <button class="btn-ghost" id="obj">Pobierz .obj (Pro100)</button>
+      </div>
+      <div class="btns">
+        <button class="btn-ghost" id="svg">Pobierz rysunek SVG</button>
+        <button class="btn-ghost" id="print">Drukuj / PDF</button>
+      </div>
+
+      <div class="hint">
+        <b>Jak wnieść to do Pro100:</b> zaimportuj <span class="tag">.obj</span> przez
+        <i>Plik → Import → Model 3D</i> jako makietę odniesienia, a mebel złóż z katalogu
+        Pro100 wg listy formatek. Format natywny <span class="tag">.pro</span> jest zamknięty —
+        to narzędzie liczy i rysuje za Ciebie, składasz finalnie w Pro100.
+      </div>
+    </div>
+
+    <!-- Panel wyników -->
+    <div>
+      <div class="card" style="margin-bottom:18px">
+        <h2>Rysunek</h2>
+        <div class="drawings">
+          <div><div class="uwaga">Widok z przodu</div><div id="front"></div></div>
+          <div><div class="uwaga">Widok z boku</div><div id="side"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Lista formatek i podsumowanie</h2>
+        <div class="sum" id="sum"></div>
+        <div id="tabela"></div>
+        <div id="akc" style="margin-top:14px"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
