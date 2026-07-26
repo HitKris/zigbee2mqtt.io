@@ -253,7 +253,124 @@
     return out;
   }
 
-  global.Pro100Engine = { DOMYSLNE, buildFurniture, specToCSV, specToOBJ };
+  // --- Eksport: BXF2 (Blum) do importu w Pro100 jako EDYTOWALNY korpus ---
+  // Odwzorowuje konstrukcję z realnej próbki „037-06": dno pełne (KUB), boki na dnie (KSL/KSR),
+  // trawersy górne (TRAV-KOB), plecy nakładane (KRW) + fronty (H-FRON-Blende). Bez okuć Blum.
+  // Układ osi: X=szerokość(0..W), Y=wysokość(0..H), Z=głębokość(0=tył .. D=front, fronty przy D+t).
+  function specToBXF2(spec) {
+    const c = spec.config;
+    const t = c.grubosc, W = c.szer, H = c.wys, D = c.gl, back = c.gruboscHDF;
+    const iw = W - 2 * t;        // innerwidth
+    const idp = D - back;        // innerdepth
+    const gapSide = 2, gapTB = 3, gapMid = 4; // luzy jak w próbce
+    const name = c.typ || "Mebel";
+
+    const rot = (x, y, z, a) => ({ r: [x, y, z, a] });
+    const trans = (x, y, z) => ({ t: [x, y, z] });
+    const panels = [];
+    const panel = (modelKey, desc, extent, transforms) =>
+      panels.push({ modelKey, desc, extent, transforms });
+
+    // --- Korpus ---
+    panel("TRAV-KOB", "Trawers górny - przedni; poziomy", [-iw, 100, t],
+      [rot(1, 0, 0, -90), rot(0, 0, 1, 180), trans(t, H, D)]);
+    panel("TRAV-KOB", "Trawers górny - tylny; poziomy", [iw, 100, t],
+      [rot(1, 0, 0, 90), trans(t, H, back)]);
+    panel("KUB", "Wieniec dolny", [W, idp, t],
+      [rot(1, 0, 0, -90), trans(0, 0, D)]);
+    panel("KSL", "Lewa strona korpusu", [-(H - t), idp, t],
+      [rot(1, 0, 0, -90), rot(0, 0, 1, -90), trans(0, t, D)]);
+    panel("KSR", "Prawa strona korpusu", [(H - t), idp, t],
+      [rot(1, 0, 0, -90), rot(0, 0, 1, 90), trans(W, t, D)]);
+    panel("KRW", "Ścianka tylna korpusu", [-W, H, back], [trans(W, 0, 0)]);
+
+    // --- Fronty --- (szuflady = piętrowo, drzwi = obok siebie)
+    const nSzuf = Math.max(0, c.liczbaSzuflad | 0);
+    const nDrzwi = Math.max(0, Math.min(2, c.liczbaDrzwi | 0));
+    if (nSzuf > 0) {
+      const fW = W - 2 * gapSide;
+      const fH = (H - 2 * gapTB - (nSzuf - 1) * gapMid) / nSzuf;
+      for (let i = 0; i < nSzuf; i++) {
+        const y = gapTB + i * (fH + gapMid);
+        panel("H-FRON-Blende", "Front szuflady", [fW, r(fH), t],
+          [rot(0, 1, 0, 180), trans(W - gapSide, r(y), D + t)]);
+      }
+    } else if (nDrzwi > 0) {
+      const fH = H - 2 * gapTB, y = gapTB;
+      if (nDrzwi === 1) {
+        panel("H-FRON-Blende", "Front", [W - 2 * gapSide, fH, t],
+          [rot(0, 1, 0, 180), trans(W - gapSide, y, D + t)]);
+      } else {
+        const fW = (W - 2 * gapSide - gapMid) / 2;
+        panel("H-FRON-Blende", "Front lewy", [r(fW), fH, t],
+          [rot(0, 1, 0, 180), trans(r(gapSide + fW), y, D + t)]);
+        panel("H-FRON-Blende", "Front prawy", [r(fW), fH, t],
+          [rot(0, 1, 0, 180), trans(W - gapSide, y, D + t)]);
+      }
+    }
+
+    // nadanie ID/UID
+    let idc = 1; // ID00001 = korpus
+    const nid = () => "ID" + String(++idc).padStart(5, "0");
+    for (const p of panels) { p.pid = nid(); p.puid = "G" + p.pid; p.luid = "L" + p.pid; }
+
+    // --- Helpery XML ---
+    const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const XS = ' xmlns:xs="http://www.w3.org/2001/XMLSchema"';
+    const ip = (n, v) => `<parameter name="${n}"><value xsi:type="xs:int"${XS}>${v}</value></parameter>`;
+    const sp = (n, v) => `<parameter name="${n}"><value xsi:type="xs:string"${XS}>${v}</value></parameter>`;
+    function emitTransforms(arr) {
+      let s = "<transformations>";
+      for (const tr of arr) {
+        if (tr.r) s += `<transformation rotation="${tr.r.join(" ")}"/>`;
+        else s += `<transformation translation="${tr.t.map(r).join(" ")}"/>`;
+      }
+      return s + "</transformations>";
+    }
+    const emitPart = (p) =>
+      `<part modelKey="${p.modelKey}" id="${p.pid}" uid="${p.puid}">` +
+      `<description>${esc(p.desc)}</description>` +
+      `<geometry xsi:type="Box"><extent>${p.extent.map(r).join(" ")}</extent></geometry>` +
+      `<drawingDetail frontOrientation="0 -1 0" floorOrientation="0 0 1"/>` +
+      `<material xsi:type="WoodMaterial" name="wood"/></part>`;
+    const emitLink = (p) =>
+      `<partLink referenceId="${p.pid}" uid="${p.luid}">` +
+      `<description>${esc(p.desc)}</description>${emitTransforms(p.transforms)}</partLink>`;
+
+    const cabParams =
+      ip("strengthtop", t) + ip("gapbottom", gapTB) + ip("strengthbottom", t) +
+      ip("outerwidth", W) + sp("cabinetbackdesign", "layOn") + ip("gapright", gapSide) +
+      ip("strengthleft", t) + sp("type", "standard") + sp("planningsystem", "FREE") +
+      ip("cabinetbackengagement", 0) + ip("gaptop", gapTB) + ip("depth", D) +
+      ip("innerwidth", iw) + ip("strengthright", t) + ip("gapfront", gapMid) +
+      ip("gapleft", gapSide) + ip("innerdepth", idp) + ip("height", H);
+
+    const date = new Date().toISOString().slice(0, 10) + "+02:00";
+    const partLinks = panels.map(emitLink).join("\n            ");
+    const partsXml = panels.map(emitPart).join("\n            ");
+
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
+      '<bxf xsi:schemaLocation="http://www.blum.com/BXF2 http://www.blum.com/BXF2/bxf2.xsd" ' +
+      'xmlns="http://www.blum.com/bxf2" xmlns:ns2="http://www.blum.com/bxf2/bxf2snp" ' +
+      'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n' +
+      `  <head><version>2.3</version><date>${date}</date><author>PRO100GEN</author>` +
+      `<copyright>Wygenerowano: Pro100 Generator (Hitner)</copyright>` +
+      `<unit meter="0.001" name="mm"/><angularUnit>degree</angularUnit>` +
+      `<country>PL</country><language>pl</language></head>\n` +
+      `  <scene><nodes><node><description>${esc(name)}</description>` +
+      `<cabinetLinks><cabinetLink referenceId="ID00001"><description>${esc(name)}</description>` +
+      `<parameters>${cabParams}</parameters></cabinetLink></cabinetLinks></node></nodes></scene>\n` +
+      `  <library>\n` +
+      `    <components/>\n    <machiningGroups/>\n    <machinings/>\n    <cabinetGroups/>\n` +
+      `    <cabinets><cabinet id="ID00001" uid="1000001"><description>${esc(name)}</description>` +
+      `<partLinks>\n            ${partLinks}\n        </partLinks></cabinet></cabinets>\n` +
+      `    <containers/>\n` +
+      `    <parts>\n            ${partsXml}\n        </parts>\n` +
+      `    <functionUnits/>\n    <articles/>\n` +
+      `  </library>\n</bxf>\n`;
+  }
+
+  global.Pro100Engine = { DOMYSLNE, buildFurniture, specToCSV, specToOBJ, specToBXF2 };
 
   // Eksport dla Node (testy)
   if (typeof module !== "undefined" && module.exports) {

@@ -58,10 +58,18 @@ mebla, a pola formularza wypełnią się automatycznie — **zawsze sprawdź i p
 przed generacją. Klucz przechowywany jest tylko lokalnie w przeglądarce; zdjęcie i klucz
 trafiają do API Anthropic wyłącznie na czas odczytu.
 
+## Eksport BXF2 (edytowalny korpus) — jest
+Przycisk **„Pobierz .bxf2 — edytowalny korpus"** generuje plik XML w formacie Blum BXF2,
+który Pro100 (6.41+) importuje przez *Plik → Import → BXF2* jako **edytowalny mebel** z
+formatkami — nie martwą bryłę. Schemat odtworzony z realnej próbki (`przyklady/037-06.bxf2`,
+szczegóły w `bxf2-schema.md`); geometria formatek zgadza się z próbką co do mm. Wersja jest
+**bez okuć Blum** (sam korpus + fronty). Konstrukcja: dno pełne + boki na dnie + trawersy górne +
+plecy nakładane + fronty. **Pierwszy import przetestuj i zgłoś ewentualny komunikat błędu** —
+schemat może wymagać drobnej korekty (nie da się tego sprawdzić bez Pro100).
+
 ## Roadmap
 - **v1 (jest):** parametry → formatki + rysunek + `.obj`. Rodzina: szafka korpusowa.
 - **v2 (jest):** odczyt wymiarów wprost ze zdjęcia odręcznego szkicu (vision, Claude API).
-- **v3 — eksport BXF2 (priorytet):** generator `*.bxf2` (XML) → import do Pro100 jako
-  **edytowalny** korpus. Wymaga przykładowego pliku `.bxf2` z konfiguratora Blum do odtworzenia
-  schematu (patrz `bxf2-schema.md`). Największa wartość — pełny, edytowalny mebel zamiast makiety.
-- **v4:** kolejne rodziny mebli; docelowo cała aranżacja (wiele modułów).
+- **v3 (jest):** eksport `*.bxf2` → import do Pro100 jako edytowalny korpus (bez okuć).
+- **v4:** kolejne typy formatek w BXF2 (półka, pełny wieniec, edytowalna szuflada) — po kolejnych
+  próbkach; docelowo cała aranżacja (wiele korpusów w jednym pliku).

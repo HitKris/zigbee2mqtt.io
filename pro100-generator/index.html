@@ -115,8 +115,12 @@
       <button class="btn-primary" id="gen">Generuj projekt</button>
 
       <div class="btns">
+        <button class="btn-ghost" id="bxf2" style="flex:1;background:#dcfce7;color:#157a4b">
+          Pobierz .bxf2 — edytowalny korpus (Pro100)</button>
+      </div>
+      <div class="btns">
         <button class="btn-ghost" id="csv">Pobierz CSV (rozkrój)</button>
-        <button class="btn-ghost" id="obj">Pobierz .obj (Pro100)</button>
+        <button class="btn-ghost" id="obj">Pobierz .obj (makieta)</button>
       </div>
       <div class="btns">
         <button class="btn-ghost" id="svg">Pobierz rysunek SVG</button>
@@ -124,10 +128,11 @@
       </div>
 
       <div class="hint">
-        <b>Jak wnieść to do Pro100:</b> zaimportuj <span class="tag">.obj</span> przez
-        <i>Plik → Import → Model 3D</i> jako makietę odniesienia, a mebel złóż z katalogu
-        Pro100 wg listy formatek. Format natywny <span class="tag">.pro</span> jest zamknięty —
-        to narzędzie liczy i rysuje za Ciebie, składasz finalnie w Pro100.
+        <b>Jak wnieść to do Pro100:</b> najlepiej <span class="tag">.bxf2</span> przez
+        <i>Plik → Import → BXF2</i> (Pro100 6.41+) — wchodzi jako <b>edytowalny korpus</b> z
+        formatkami. Alternatywnie <span class="tag">.obj</span> (<i>Import → Model 3D</i>) jako
+        makieta odniesienia. Wersja BXF2 jest bez okuć Blum — po imporcie sprawdź wymiary; jeśli
+        Pro100 zgłosi błąd, prześlij komunikat — dopracujemy plik.
       </div>
     </div>
     </div>

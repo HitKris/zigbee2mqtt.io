@@ -148,6 +148,7 @@
   $("gen").addEventListener("click", render);
   $("csv").addEventListener("click", () => { if (!spec) render(); pobierz(baza() + "-formatki.csv", E.specToCSV(spec), "text/csv;charset=utf-8"); });
   $("obj").addEventListener("click", () => { if (!spec) render(); pobierz(baza() + ".obj", E.specToOBJ(spec), "text/plain"); });
+  $("bxf2").addEventListener("click", () => { if (!spec) render(); pobierz(baza() + ".bxf2", E.specToBXF2(spec), "application/xml"); });
   $("svg").addEventListener("click", () => {
     if (!spec) render();
     const front = $("front").innerHTML, side = $("side").innerHTML;

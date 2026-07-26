@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bxf xsi:schemaLocation="http://www.blum.com/BXF2 http://www.blum.com/BXF2/bxf2.xsd" xmlns="http://www.blum.com/bxf2" xmlns:ns2="http://www.blum.com/bxf2/bxf2snp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <version>2.3</version>
+        <date>2026-07-26+02:00</date>
+        <author>JD89BJ48</author>
+        <copyright>Copyright 2026 by Julius Blum GmbH, Industriestrasse 1, Hoechst, Austria</copyright>
+        <unit meter="0.001" name="mm"/>
+        <angularUnit>degree</angularUnit>
+        <country>PL</country>
+        <language>pl</language>
+        <parameters>
+            <parameter name="converterVersion">
+                <value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1.4.17 (core: 1.4.12.1)</value>
+            </parameter>
+        </parameters>
+    </head>
+    <scene>
+        <nodes>
+            <node>
+                <description>Nowy projekt</description>
+                <cabinetLinks>
+                    <cabinetLink referenceId="ID00001">
+                        <description>037-06</description>
+                        <parameters>
+                            <parameter name="strengthtop">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">18</value>
+                            </parameter>
+                            <parameter name="gapbottom">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">3</value>
+                            </parameter>
+                            <parameter name="strengthbottom">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">18</value>
+                            </parameter>
+                            <parameter name="outerwidth">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1000</value>
+                            </parameter>
+                            <parameter name="cabinetbackdesign">
+                                <value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">layOn</value>
+                            </parameter>
+                            <parameter name="gapright">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">2</value>
+                            </parameter>
+                            <parameter name="strengthleft">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">18</value>
+                            </parameter>
+                            <parameter name="type">
+                                <value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">standard</value>
+                            </parameter>
+                            <parameter name="planningsystem">
+                                <value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">FREE</value>
+                            </parameter>
+                            <parameter name="cabinetbackengagement">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</value>
+                            </parameter>
+                            <parameter name="gaptop">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">3</value>
+                            </parameter>
+                            <parameter name="depth">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">542</value>
+                            </parameter>
+                            <parameter name="innerwidth">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">964</value>
+                            </parameter>
+                            <parameter name="strengthright">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">18</value>
+                            </parameter>
+                            <parameter name="gapfront">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">4</value>
+                            </parameter>
+                            <parameter name="gapleft">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">2</value>
+                            </parameter>
+                            <parameter name="innerdepth">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">539</value>
+                            </parameter>
+                            <parameter name="height">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">788</value>
+                            </parameter>
+                        </parameters>
+                    </cabinetLink>
+                </cabinetLinks>
+            </node>
+        </nodes>
+    </scene>
+    <library>
+        <components>
+            <component componentNumber="47421233" modelKey="KO-SCH" id="ID00004">
+                <relatedMachiningGroupLinks>
+                    <machiningGroupLink id="ID00014" referenceId="ID00005">
+                        <transformations>
+                            <transformation rotation="1 0 0 -90"/>
+                            <transformation rotation="0 0 1 -90"/>
+                        </transformations>
+                    </machiningGroupLink>
+                </relatedMachiningGroupLinks>
+            </component>
+            <component componentNumber="47372036" modelKey="KO-SCH" id="ID00015">
+                <relatedMachiningGroupLinks>
+                    <machiningGroupLink id="ID00025" referenceId="ID00005">
+                        <transformations>
+                            <transformation rotation="1 0 0 -90"/>
+                            <transformation rotation="0 0 1 90"/>
+                        </transformations>
+                    </machiningGroupLink>
+                </relatedMachiningGroupLinks>
+            </component>
+            <component componentNumber="41575596" modelKey="ZARGE" id="ID00026"/>
+            <component componentNumber="47197491" modelKey="ABD-ZA" id="ID00027"/>
+            <component componentNumber="41367562" modelKey="ZARGE" id="ID00028"/>
+            <component componentNumber="47195550" modelKey="FRONTH" id="ID00030"/>
+            <component componentNumber="43886736" modelKey="FRONTH" id="ID00031"/>
+            <component componentNumber="48162180" modelKey="RUECKW" id="ID00032">
+                <relatedMachiningGroupLinks>
+                    <machiningGroupLink id="ID00038" referenceId="ID00033">
+                        <transformations>
+                            <transformation rotation="0 1 0 180"/>
+                            <transformation translation="52.5 8 45"/>
+                        </transformations>
+                    </machiningGroupLink>
+                </relatedMachiningGroupLinks>
+            </component>
+            <component componentNumber="41183467" modelKey="RUECKW" id="ID00039">
+                <relatedMachiningGroupLinks>
+                    <machiningGroupLink id="ID00045" referenceId="ID00033">
+                        <transformations>
+                            <transformation rotation="0 1 0 180"/>
+                            <transformation translation="-52.5 8 45"/>
+                        </transformations>
+                    </machiningGroupLink>
+                </relatedMachiningGroupLinks>
+            </component>
+            <component componentNumber="45019526" modelKey="VO-STK" id="ID00046">
+                <machiningLinks>
+                    <machiningLink id="ID00048" referenceId="ID00047"/>
+                </machiningLinks>
+            </component>
+            <component componentNumber="46416618" modelKey="HALT-T" id="ID00049"/>
+        </components>
+        <machiningGroups>
+            <machiningGroup id="ID00005">
+                <machiningLinks>
+                    <machiningLink id="ID00007" referenceId="ID00006">
+                        <transformations>
+                            <transformation translation="0 -18 0"/>
+                        </transformations>
+                    </machiningLink>
+                    <machiningLink id="ID00009" referenceId="ID00006"/>
+                    <machiningLink id="ID00011" referenceId="ID00006">
+                        <transformations>
+                            <transformation translation="0 224 0"/>
+                        </transformations>
+                    </machiningLink>
+                    <machiningLink id="ID00013" referenceId="ID00006">
+                        <transformations>
+                            <transformation translation="0 256 0"/>
+                        </transformations>
+                    </machiningLink>
+                </machiningLinks>
+            </machiningGroup>
+            <machiningGroup id="ID00033">
+                <machiningLinks>
+                    <machiningLink id="ID00035" referenceId="ID00006"/>
+                    <machiningLink id="ID00037" referenceId="ID00006">
+                        <transformations>
+                            <transformation translation="0 32 0"/>
+                        </transformations>
+                    </machiningLink>
+                </machiningLinks>
+            </machiningGroup>
+        </machiningGroups>
+        <machinings>
+            <machining xsi:type="Drilling" radius="1.25" depth="3.0" depthOrientation="0 0 -1" id="ID00006"/>
+            <machining xsi:type="Cut" orientation="-1 0 0" originalSize="1036.3" finalSize="832.0" id="ID00047"/>
+        </machinings>
+        <cabinetGroups/>
+        <cabinets>
+            <cabinet id="ID00001" uid="4196706">
+                <description>037-06</description>
+                <partLinks>
+                    <partLink referenceId="ID00056" uid="HY76-001L">
+                        <description>Trawers górny - przedni; poziomy</description>
+                        <transformations>
+                            <transformation rotation="1 0 0 -90"/>
+                            <transformation rotation="0 0 1 180"/>
+                            <transformation translation="18 788 542"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00058" uid="HY76-001N">
+                        <description>Trawers górny - tylny; poziomy</description>
+                        <transformations>
+                            <transformation rotation="1 0 0 90"/>
+                            <transformation translation="18 788 3"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00060" uid="HY76-001P">
+                        <description>Wieniec dolny</description>
+                        <transformations>
+                            <transformation rotation="1 0 0 -90"/>
+                            <transformation translation="0 0 542"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00062" uid="HY76-001R">
+                        <description>Lewa strona korpusu</description>
+                        <transformations>
+                            <transformation rotation="1 0 0 -90"/>
+                            <transformation rotation="0 0 1 -90"/>
+                            <transformation translation="0 18 542"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00064" uid="HY76-001T">
+                        <description>Prawa strona korpusu</description>
+                        <transformations>
+                            <transformation rotation="1 0 0 -90"/>
+                            <transformation rotation="0 0 1 90"/>
+                            <transformation translation="1000 18 542"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00066" uid="HY76-001V">
+                        <description>A/1 Ścianka tylna korpusu</description>
+                        <parameters>
+                            <parameter name="zone">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</value>
+                            </parameter>
+                            <parameter name="zonePosition">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</value>
+                            </parameter>
+                        </parameters>
+                        <transformations>
+                            <transformation translation="1000 0 0"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00068" uid="HY76-001X">
+                        <description>A/2 Front</description>
+                        <parameters>
+                            <parameter name="zone">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</value>
+                            </parameter>
+                            <parameter name="zonePosition">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">2</value>
+                            </parameter>
+                        </parameters>
+                        <transformations>
+                            <transformation rotation="0 1 0 180"/>
+                            <transformation translation="998 396 560"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00068" uid="HY76-001Z">
+                        <description>A/1 Front</description>
+                        <parameters>
+                            <parameter name="zone">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</value>
+                            </parameter>
+                            <parameter name="zonePosition">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</value>
+                            </parameter>
+                        </parameters>
+                        <transformations>
+                            <transformation rotation="0 1 0 180"/>
+                            <transformation translation="998 3 560"/>
+                        </transformations>
+                    </partLink>
+                </partLinks>
+                <containerLinks>
+                    <containerLink referenceId="ID00002">
+                        <transformations>
+                            <transformation translation="18 620 3"/>
+                        </transformations>
+                    </containerLink>
+                </containerLinks>
+            </cabinet>
+        </cabinets>
+        <containers>
+            <container id="ID00002">
+                <functionUnitLinks>
+                    <functionUnitLink referenceId="ID00003">
+                        <parameters>
+                            <parameter name="zonePosition">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</value>
+                            </parameter>
+                            <parameter name="zone">
+                                <value xsi:type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</value>
+                            </parameter>
+                        </parameters>
+                        <transformations>
+                            <transformation translation="0 33 497"/>
+                        </transformations>
+                        <zone row="0" column="0"/>
+                    </functionUnitLink>
+                </functionUnitLinks>
+                <boundary xsi:type="Box">
+                    <extent>964 106 539</extent>
+                </boundary>
+            </container>
+        </containers>
+        <parts>
+            <part modelKey="H-RUEW-BSys" id="ID00050" uid="HY76-001E">
+                <description>Ścianka tylna szuflady</description>
+                <geometry xsi:type="Box">
+                    <extent>-877 68 16</extent>
+                </geometry>
+                <inheritedMachinings>
+                    <inheritedMachining>
+                        <componentLink referenceId="ID00032">
+                            <transformations>
+                                <transformation rotation="0 1 0 180"/>
+                                <transformation translation="43.5 8 61"/>
+                            </transformations>
+                        </componentLink>
+                        <machiningGroupLinkReferences>
+                            <machiningGroupLinkReference referenceId="ID00038"/>
+                        </machiningGroupLinkReferences>
+                    </inheritedMachining>
+                    <inheritedMachining>
+                        <componentLink referenceId="ID00039">
+                            <transformations>
+                                <transformation rotation="0 1 0 180"/>
+                                <transformation translation="-920.5 8 61"/>
+                            </transformations>
+                        </componentLink>
+                        <machiningGroupLinkReferences>
+                            <machiningGroupLinkReference referenceId="ID00045"/>
+                        </machiningGroupLinkReferences>
+                    </inheritedMachining>
+                </inheritedMachinings>
+                <drawingDetail frontOrientation="0 0 -1" floorOrientation="0 -1 0"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="ZUSCHN-BSys" id="ID00053" uid="HY76-001H">
+                <description>Dno szuflady</description>
+                <geometry xsi:type="Box">
+                    <extent>-889 478 16</extent>
+                </geometry>
+                <drawingDetail frontOrientation="0 -1 0" floorOrientation="0 0 1"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="TRAV-KOB-vo-li" id="ID00056" uid="HY76-001K">
+                <description>Trawers górny - przedni; poziomy</description>
+                <geometry xsi:type="Box">
+                    <extent>-964 100 18</extent>
+                </geometry>
+                <drawingDetail frontOrientation="0 -1 0" floorOrientation="0 0 1"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="TRAV-KOB-hi-li" id="ID00058" uid="HY76-001M">
+                <description>Trawers górny - tylny; poziomy</description>
+                <geometry xsi:type="Box">
+                    <extent>964 100 18</extent>
+                </geometry>
+                <drawingDetail frontOrientation="0 1 0" floorOrientation="0 0 1"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="KUB" id="ID00060" uid="HY76-001O">
+                <description>Wieniec dolny</description>
+                <geometry xsi:type="Box">
+                    <extent>1000 539 18</extent>
+                </geometry>
+                <drawingDetail frontOrientation="0 -1 0" floorOrientation="0 0 -1"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="KSL" id="ID00062" uid="HY76-001Q">
+                <description>Lewa strona korpusu</description>
+                <geometry xsi:type="Box">
+                    <extent>-770 539 18</extent>
+                </geometry>
+                <inheritedMachinings>
+                    <inheritedMachining>
+                        <componentLink referenceId="ID00004">
+                            <transformations>
+                                <transformation rotation="0 0 1 90"/>
+                                <transformation rotation="1 0 0 90"/>
+                                <transformation translation="-635 42 18"/>
+                            </transformations>
+                        </componentLink>
+                        <machiningGroupLinkReferences>
+                            <machiningGroupLinkReference referenceId="ID00014"/>
+                        </machiningGroupLinkReferences>
+                    </inheritedMachining>
+                </inheritedMachinings>
+                <drawingDetail frontOrientation="0 -1 0" floorOrientation="1 0 0"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="KSR" id="ID00064" uid="HY76-001S">
+                <description>Prawa strona korpusu</description>
+                <geometry xsi:type="Box">
+                    <extent>770 539 18</extent>
+                </geometry>
+                <inheritedMachinings>
+                    <inheritedMachining>
+                        <componentLink referenceId="ID00015">
+                            <transformations>
+                                <transformation rotation="0 0 1 -90"/>
+                                <transformation rotation="1 0 0 90"/>
+                                <transformation translation="635 42 18"/>
+                            </transformations>
+                        </componentLink>
+                        <machiningGroupLinkReferences>
+                            <machiningGroupLinkReference referenceId="ID00025"/>
+                        </machiningGroupLinkReferences>
+                    </inheritedMachining>
+                </inheritedMachinings>
+                <drawingDetail frontOrientation="0 -1 0" floorOrientation="-1 0 0"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="KRW" id="ID00066" uid="HY76-001U">
+                <description>Ścianka tylna korpusu</description>
+                <geometry xsi:type="Box">
+                    <extent>-1000 788 3</extent>
+                </geometry>
+                <drawingDetail frontOrientation="0 0 1" floorOrientation="0 -1 0"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+            <part modelKey="H-FRON-Blende" id="ID00068" uid="HY76-001W">
+                <description>Front</description>
+                <geometry xsi:type="Box">
+                    <extent>996 389 18</extent>
+                </geometry>
+                <drawingDetail frontOrientation="0 0 -1" floorOrientation="0 -1 0"/>
+                <material xsi:type="WoodMaterial" name="wood"/>
+            </part>
+        </parts>
+        <functionUnits>
+            <functionUnit id="ID00003" uid="25796603">
+                <articleLinks>
+                    <articleLink quantity="1" referenceId="ID09301459"/>
+                    <articleLink quantity="1" referenceId="ID01847502"/>
+                    <articleLink quantity="1" referenceId="ID01838267"/>
+                    <articleLink quantity="1" referenceId="ID02843026"/>
+                    <articleLink quantity="2" referenceId="ID08046152"/>
+                    <articleLink quantity="1" referenceId="ID08479022"/>
+                    <articleLink quantity="1" referenceId="ID01802448"/>
+                </articleLinks>
+                <partLinks>
+                    <partLink referenceId="ID00050" uid="HY76-001G">
+                        <description>Ścianka tylna szuflady</description>
+                        <transformations>
+                            <transformation rotation="0 1 0 180"/>
+                            <transformation translation="43.5 -8 -441"/>
+                        </transformations>
+                    </partLink>
+                    <partLink referenceId="ID00053" uid="HY76-001J">
+                        <description>Dno szuflady</description>
+                        <transformations>
+                            <transformation rotation="1 0 0 -90"/>
+                            <transformation rotation="0 0 1 180"/>
+                            <transformation translation="37.5 -8 35"/>
+                        </transformations>
+                    </partLink>
+                </partLinks>
+                <componentLinks>
+                    <componentLink referenceId="ID00004"/>
+                    <componentLink referenceId="ID00015">
+                        <transformations>
+                            <transformation translation="964 0 0"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00026">
+                        <transformations>
+                            <transformation translation="0 0 -2"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00027">
+                        <transformations>
+                            <transformation rotation="0 1 0 180"/>
+                            <transformation rotation="0 0 1 -1.05"/>
+                            <transformation translation="6.46 36.81 -3.65"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00028">
+                        <transformations>
+                            <transformation translation="964 0 -2"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00027">
+                        <transformations>
+                            <transformation rotation="0 0 1 1.05"/>
+                            <transformation translation="957.54 36.81 -3.65"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00030">
+                        <transformations>
+                            <transformation translation="0 0 -2"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00031">
+                        <transformations>
+                            <transformation translation="964 0 -2"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00032">
+                        <transformations>
+                            <transformation translation="0 0 -502"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00039">
+                        <transformations>
+                            <transformation translation="964 0 -502"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00046">
+                        <transformations>
+                            <transformation translation="898 0 -2"/>
+                        </transformations>
+                    </componentLink>
+                    <componentLink referenceId="ID00049">
+                        <transformations>
+                            <transformation translation="482 0 -0.3"/>
+                        </transformations>
+                    </componentLink>
+                </componentLinks>
+            </functionUnit>
+        </functionUnits>
+        <articles>
+            <article itemNumber="08046152" articleNumber="ZAA.532C.BL" totalQuantity="2" id="ID08046152">
+                <description>TANDEMBOX  Element z logo, prostokątna, symetr., nadrukowany (blum)</description>
+                <material>biała</material>
+                <componentNumbers>
+                    <componentNumber>47197491</componentNumber>
+                </componentNumbers>
+            </article>
+            <article itemNumber="08479022" articleNumber="Z31L1036A" totalQuantity="1" id="ID08479022">
+                <description>TANDEMBOX front, do Szuflada wewnętrzna z relingiem poprzecznym, GW=1168 mm, do przycięcia, do TANDEMBOX intivo/TANDEMBOX</description>
+                <material>biała</material>
+                <componentNumbers>
+                    <componentNumber>45019526</componentNumber>
+                </componentNumbers>
+            </article>
+            <article itemNumber="01847502" articleNumber="378M5002SA" totalQuantity="1" id="ID01847502">
+                <description>Bok szuflady TANDEMBOX, wysokość M (83.6 mm), dł.=500 mm, lewy, do TANDEMBOX intivo</description>
+                <material>biała</material>
+                <componentNumbers>
+                    <componentNumber>41575596</componentNumber>
+                </componentNumbers>
+            </article>
+            <article itemNumber="09301459" articleNumber="578.5001M" totalQuantity="1" id="ID09301459">
+                <description>Prowadnica TANDEMBOX Zint. BLUMOTION / odpowiedni do TOB / odpowiedni do SERVO-DRIVE, Prowadnica, 30 kg, dł.=500 mm, lewa/prawa</description>
+                <material>cynkowana</material>
+                <componentNumbers>
+                    <componentNumber>47372036</componentNumber>
+                    <componentNumber>47421233</componentNumber>
+                </componentNumbers>
+            </article>
+            <article itemNumber="01838267" articleNumber="378M5002SA" totalQuantity="1" id="ID01838267">
+                <description>Bok szuflady TANDEMBOX, wysokość M (83.6 mm), dł.=500 mm, prawy, do TANDEMBOX intivo</description>
+                <material>biała</material>
+                <componentNumbers>
+                    <componentNumber>41367562</componentNumber>
+                </componentNumbers>
+            </article>
+            <article itemNumber="01802448" articleNumber="ZIF.71M0" totalQuantity="1" id="ID01802448">
+                <description>Mocowanie frontu TANDEMBOX , wys. M, do szuflady wewnętrznej, lewe/prawe, do</description>
+                <material>biała</material>
+                <componentNumbers>
+                    <componentNumber>43886736</componentNumber>
+                    <componentNumber>46416618</componentNumber>
+                    <componentNumber>47195550</componentNumber>
+                </componentNumbers>
+            </article>
+            <article itemNumber="02843026" articleNumber="Z30M000S.04" totalQuantity="1" id="ID02843026">
+                <description>Uchwyt drewnianej ścianki tylnej TANDEMBOX, wys. M (96,5 mm), prawy+lewy</description>
+                <material>biała</material>
+                <componentNumbers>
+                    <componentNumber>41183467</componentNumber>
+                    <componentNumber>48162180</componentNumber>
+                </componentNumbers>
+            </article>
+        </articles>
+    </library>
+</bxf>
