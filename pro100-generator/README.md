@@ -4,15 +4,20 @@ Narzędzie dla marki **Hitner**: na podstawie parametrów mebla (odczytanych ze 
 generuje **listę formatek**, **rysunek 2D z wymiarami** i **bryłę 3D `.obj`** do wczytania
 w programie Pro100. Cel: skrócić czas mierzenia i liczenia — właściwy mebel składasz w Pro100.
 
-## Dlaczego tak, a nie „szkic → gotowy plik .pro"
-Natywny format projektu Pro100 (`.pro`) jest **zamknięty** — brak publicznego API/SDK i
-dokumentacji formatu. Pro100 importuje z zewnątrz tylko bryły 3D (`.obj`, `.3ds`, `.dae`) jako
-„martwą" siatkę, bez edytowalnych formatek. Dlatego to narzędzie działa jako **asystent**:
-robi całe rozpoznanie i liczenie, a finalny, edytowalny mebel składasz w Pro100 z katalogu —
-korzystając z gotowej listy formatek i bryły `.obj` jako makiety odniesienia.
+## Dwie drogi do Pro100
 
-> Jeśli producent (Ecru / Viasoft) udostępni oficjalną drogę natywną — patrz
-> `zapytanie-do-producenta.md` — dołożymy eksport bezpośrednio do `.pro`.
+**1. `.obj` — makieta (jest w MVP).** Natywny format projektu Pro100 (`.pro`) jest zamknięty,
+a import 3D (`.obj`, `.3ds`, `.dae`) daje tylko „martwą" siatkę bez formatek. Ta ścieżka
+działa jako **asystent**: liczy i rysuje, a mebel składasz w Pro100 z katalogu, korzystając z
+listy formatek i `.obj` jako makiety odniesienia.
+
+**2. BXF2 (Blum) — edytowalny korpus (docelowo).** Pro100 (od wersji **6.41**) importuje pliki
+`*.bxf2` z konfiguratora korpusów Blum jako **edytowalny mebel** — z wymiarami formatek
+(rozkrój), pozycjami wierceń i okuciami. BXF2 to **XML** (tekst), więc da się go generować
+programowo. To realna droga do „szkic → edytowalny mebel w Pro100", omijająca zamknięty `.pro`.
+Wymaga odtworzenia schematu z **przykładowego pliku `.bxf2`** (eksport z konfiguratora Blum)
+oraz — dla pełnej zgodności — specyfikacji interfejsu BXF z programu partnerskiego Blum.
+Szczegóły i kontakty: `zapytanie-do-producenta.md`.
 
 ## Jak uruchomić
 Otwórz `index.html` w przeglądarce (wystarczy dwuklik — nie wymaga instalacji ani serwera).
@@ -48,6 +53,8 @@ node -e 'const E=require("./engine.js"); console.log(E.buildFurniture({szer:600,
 
 ## Roadmap
 - **v1 (jest):** parametry → formatki + rysunek + `.obj`. Rodzina: szafka korpusowa.
-- **v2:** odczyt wymiarów bezpośrednio ze zdjęcia odręcznego szkicu (vision, Claude API).
-- **v3:** kolejne rodziny mebli; docelowo cała aranżacja (wiele modułów).
-- **Warstwa natywna:** eksport `.pro`, jeśli producent udostępni oficjalną drogę.
+- **v2 — eksport BXF2 (priorytet):** generator `*.bxf2` (XML) → import do Pro100 jako
+  **edytowalny** korpus. Wymaga przykładowego pliku `.bxf2` z konfiguratora Blum do odtworzenia
+  schematu. Największa wartość — pełny, edytowalny mebel zamiast makiety.
+- **v3:** odczyt wymiarów wprost ze zdjęcia odręcznego szkicu (vision, Claude API).
+- **v4:** kolejne rodziny mebli; docelowo cała aranżacja (wiele modułów).
