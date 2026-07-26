@@ -51,10 +51,17 @@ standard warsztatu.
 node -e 'const E=require("./engine.js"); console.log(E.buildFurniture({szer:600,wys:720,gl:560}).podsumowanie)'
 ```
 
+## Odczyt ze szkicu (AI) — jak używać
+W karcie „Odczyt ze szkicu (AI)": wgraj zdjęcie odręcznego szkicu, wklej swój klucz API
+Anthropic i kliknij „Odczytaj szkic i wypełnij pola". Model rozpozna typ, wymiary i układ
+mebla, a pola formularza wypełnią się automatycznie — **zawsze sprawdź i popraw je ręcznie**
+przed generacją. Klucz przechowywany jest tylko lokalnie w przeglądarce; zdjęcie i klucz
+trafiają do API Anthropic wyłącznie na czas odczytu.
+
 ## Roadmap
 - **v1 (jest):** parametry → formatki + rysunek + `.obj`. Rodzina: szafka korpusowa.
-- **v2 — eksport BXF2 (priorytet):** generator `*.bxf2` (XML) → import do Pro100 jako
+- **v2 (jest):** odczyt wymiarów wprost ze zdjęcia odręcznego szkicu (vision, Claude API).
+- **v3 — eksport BXF2 (priorytet):** generator `*.bxf2` (XML) → import do Pro100 jako
   **edytowalny** korpus. Wymaga przykładowego pliku `.bxf2` z konfiguratora Blum do odtworzenia
-  schematu. Największa wartość — pełny, edytowalny mebel zamiast makiety.
-- **v3:** odczyt wymiarów wprost ze zdjęcia odręcznego szkicu (vision, Claude API).
+  schematu (patrz `bxf2-schema.md`). Największa wartość — pełny, edytowalny mebel zamiast makiety.
 - **v4:** kolejne rodziny mebli; docelowo cała aranżacja (wiele modułów).

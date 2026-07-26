@@ -59,7 +59,25 @@
   </header>
 
   <div class="wrap">
-    <!-- Panel wejściowy -->
+    <!-- Kolumna wejściowa -->
+    <div class="col-in">
+    <div class="card" style="margin-bottom:18px">
+      <h2>Odczyt ze szkicu (AI)</h2>
+      <label>Zdjęcie odręcznego szkicu</label>
+      <input id="szkicFile" type="file" accept="image/*" />
+      <label>Klucz API Anthropic</label>
+      <input id="apiKey" type="password" placeholder="sk-ant-..." autocomplete="off" />
+      <label>Model</label>
+      <input id="model" value="claude-opus-5" />
+      <button class="btn-primary" id="odczytaj">Odczytaj szkic i wypełnij pola</button>
+      <div id="aiStatus" class="uwaga" style="margin-top:8px"></div>
+      <div class="hint">
+        Zdjęcie i klucz API są wysyłane do API Anthropic wyłącznie w celu odczytania wymiarów.
+        Klucz przechowywany jest tylko lokalnie w tej przeglądarce (localStorage). Odczyt zawsze
+        możesz poprawić ręcznie w polach poniżej przed generacją.
+      </div>
+    </div>
+
     <div class="card">
       <h2>Parametry mebla</h2>
       <label>Typ / nazwa</label>
@@ -111,6 +129,7 @@
         Pro100 wg listy formatek. Format natywny <span class="tag">.pro</span> jest zamknięty —
         to narzędzie liczy i rysuje za Ciebie, składasz finalnie w Pro100.
       </div>
+    </div>
     </div>
 
     <!-- Panel wyników -->

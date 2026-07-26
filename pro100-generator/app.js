@@ -156,6 +156,93 @@
   });
   $("print").addEventListener("click", () => window.print());
 
+  // --- Tor B: odczyt szkicu ze zdjęcia (vision, Claude API) ---
+  const LS_KEY = "pro100_api_key", LS_MODEL = "pro100_model";
+  if (localStorage.getItem(LS_KEY)) $("apiKey").value = localStorage.getItem(LS_KEY);
+  if (localStorage.getItem(LS_MODEL)) $("model").value = localStorage.getItem(LS_MODEL);
+  $("apiKey").addEventListener("change", () => localStorage.setItem(LS_KEY, $("apiKey").value.trim()));
+  $("model").addEventListener("change", () => localStorage.setItem(LS_MODEL, $("model").value.trim()));
+
+  // Docelowy JSON zgodny ze schematem konfiguracji silnika (Pro100Engine.DOMYSLNE)
+  const PROMPT_VISION =
+    "Analizujesz zdjęcie odręcznego szkicu POJEDYNCZEGO mebla (np. szafki, komody). " +
+    "Odczytaj parametry i zwróć WYŁĄCZNIE obiekt JSON (bez komentarzy, bez markdown) o polach: " +
+    "typ (string, np. \"Szafka\"), szer, wys, gl (wymiary gabarytowe w mm, liczby całkowite), " +
+    "grubosc (grubość płyty w mm, domyślnie 18), gruboscHDF (domyślnie 3), " +
+    "liczbaPolek (int), liczbaDrzwi (0, 1 lub 2), liczbaSzuflad (int), " +
+    "plecy (\"nakladane\"|\"wpuszczane\"|\"brak\", domyślnie \"nakladane\"). " +
+    "Jeśli wymiar jest zapisany na szkicu — użyj go dokładnie. Jeśli brakuje — oszacuj typową wartość. " +
+    "Zwróć tylko JSON.";
+
+  function fileToBase64(file) {
+    return new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => {
+        const s = String(r.result);
+        res({ media: s.substring(5, s.indexOf(";")), data: s.substring(s.indexOf(",") + 1) });
+      };
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+  }
+
+  function setVal(id, v) { if (v !== undefined && v !== null && v !== "") $(id).value = v; }
+  function fillFromSpec(s) {
+    setVal("typ", s.typ);
+    setVal("szer", s.szer); setVal("wys", s.wys); setVal("gl", s.gl);
+    setVal("grubosc", s.grubosc); setVal("gruboscHDF", s.gruboscHDF);
+    setVal("liczbaPolek", s.liczbaPolek); setVal("liczbaSzuflad", s.liczbaSzuflad);
+    if (s.liczbaDrzwi !== undefined && s.liczbaDrzwi !== null)
+      $("liczbaDrzwi").value = Math.max(0, Math.min(2, s.liczbaDrzwi | 0));
+    if (["nakladane", "wpuszczane", "brak"].indexOf(s.plecy) >= 0) $("plecy").value = s.plecy;
+  }
+
+  async function odczytajSzkic() {
+    const status = $("aiStatus");
+    const file = $("szkicFile").files[0];
+    const key = $("apiKey").value.trim();
+    if (!file) { status.textContent = "Wybierz zdjęcie szkicu."; return; }
+    if (!key) { status.textContent = "Podaj klucz API Anthropic."; return; }
+    status.textContent = "Odczytuję szkic…";
+    try {
+      const { media, data } = await fileToBase64(file);
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": key,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true",
+        },
+        body: JSON.stringify({
+          model: $("model").value.trim() || "claude-opus-5",
+          max_tokens: 1024,
+          thinking: { type: "disabled" },
+          messages: [{
+            role: "user",
+            content: [
+              { type: "image", source: { type: "base64", media_type: media, data: data } },
+              { type: "text", text: PROMPT_VISION },
+            ],
+          }],
+        }),
+      });
+      const j = await res.json();
+      if (!res.ok) {
+        status.textContent = "Błąd API: " + ((j.error && j.error.message) || res.status);
+        return;
+      }
+      const txt = (j.content || []).filter((b) => b.type === "text").map((b) => b.text).join("");
+      const spec = JSON.parse(txt.replace(/```json/gi, "").replace(/```/g, "").trim());
+      fillFromSpec(spec);
+      render();
+      status.textContent = "Odczytano — sprawdź i popraw pola, potem kliknij „Generuj projekt”.";
+    } catch (e) {
+      status.textContent = "Nie udało się odczytać: " + e.message;
+    }
+  }
+  $("odczytaj").addEventListener("click", odczytajSzkic);
+
   // pierwszy render
   render();
 })();
